@@ -91,7 +91,7 @@ std::istream& operator>>(std::istream& is, ip4& a)
     }
     else {
         is.setstate(std::ios_base::failbit);
-        throw(std::exception("Wrong ip format string!"));
+        throw(std::invalid_argument("Wrong ip format string!"));
     }
 
     return is;
