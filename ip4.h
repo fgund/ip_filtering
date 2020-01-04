@@ -10,8 +10,8 @@ class ip4
     std::array<unsigned char, 4> data;
 public:
     constexpr ip4() = delete;
-    constexpr ip4(unsigned char const a, unsigned char const b,
-                  unsigned char const c, unsigned char const d);
+    constexpr ip4(unsigned char a, unsigned char b,
+                  unsigned char c, unsigned char d);
     ip4(std::string& str);
 
     ip4(ip4 const & other) noexcept;
