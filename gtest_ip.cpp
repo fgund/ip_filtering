@@ -1,6 +1,12 @@
 #include "ip4.h"
 
 #include <gtest/gtest.h>
+TEST(test_ip, test_ip_assign_op)
+{
+    ip4 a1(192,168,0,1);
+    ip4 a2 = a1;
+    ASSERT_EQ(a1, a2);
+}
 
 TEST(test_ip, test_ip_to_string)
 {
@@ -15,7 +21,7 @@ TEST(test_ip, test_ip_from_string)
 
 TEST(test_ip, test_ip_character_throw)
 {
-    std::string str("192.168.o.1");
+    std::string str("192.168.o.1l");
     ASSERT_ANY_THROW(ip4{str});
 }
 TEST(test_ip, test_ip_overflow)

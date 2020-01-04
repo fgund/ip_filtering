@@ -11,7 +11,7 @@ include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup(TARGETS)
 
 add_executable(ip_filter ip_filter.cpp)
-add_library(ip_filter_lib ip4.cpp)
+add_library(ip_filter_lib ip4.cpp ip4.h)
 add_executable(gtest_ip gtest_ip.cpp)
 
 set_target_properties(
@@ -40,9 +40,9 @@ if (MSVC)
     target_compile_options(ip_filter_lib PRIVATE
         /W4 /MD
     )
-#    target_compile_options(gtest_ip PRIVATE
-#        /W4 /MD
-#    )
+    target_compile_options(gtest_ip PRIVATE
+        /W4 /MD
+    )
 else ()
     target_compile_options(ip_filter PRIVATE
         -Wall -Wextra -pedantic -Werror
@@ -80,4 +80,4 @@ include(CPack)
 
 enable_testing()
 
-add_test(g_test_version "bin/gtest_ip")
+add_test(gtest_ip "bin/gtest_ip")

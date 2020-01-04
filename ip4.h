@@ -17,7 +17,15 @@ public:
     ip4& operator=(ip4 const & other) noexcept;
 
     std::string to_string() const;
+    constexpr unsigned long to_ulong() const noexcept;
 
+
+    friend bool operator==(ip4 const & a1, ip4 const & a2) noexcept;
+    friend bool operator!=(ip4 const & a1, ip4 const & a2) noexcept;
+    friend bool operator<(ip4 const & a1, ip4 const & a2) noexcept;
+    friend bool operator>(ip4 const & a1, ip4 const & a2) noexcept;
+    friend bool operator<=(ip4 const & a1, ip4 const & a2) noexcept;
+    friend bool operator>=(ip4 const & a1, ip4 const & a2) noexcept;
 
     friend std::ostream& operator<<(std::ostream& os, const ip4& a);
 

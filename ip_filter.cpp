@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include "ip4.h"
+#include "filter.h"
 
 // ("",  '.') -> [""]
 // ("11", '.') -> ["11"]
@@ -44,7 +45,7 @@ int main(int argc, char const *argv[])
         }
 
         // TODO reverse lexicographically sort
-
+        std::sort(ip_pool.begin(),ip_pool.end(),std::greater<ip4>());
         for(auto &cur_ip : ip_pool)
         {
             std::cout << cur_ip <<std::endl;
@@ -60,7 +61,12 @@ int main(int argc, char const *argv[])
 
         // TODO filter by first byte and output
         // ip = filter(1)
-
+        std::cout << "Filter 1:" <<std::endl;
+        auto ip_1 = filter(ip_pool,[](ip4 ip){ return (ip>=ip4{1,0,0,0} && ip<ip4{2,0,0,0});});
+        for(auto &cur_ip : ip_1)
+        {
+            std::cout << cur_ip <<std::endl;
+        }
         // 1.231.69.33
         // 1.87.203.225
         // 1.70.44.170
@@ -69,7 +75,12 @@ int main(int argc, char const *argv[])
 
         // TODO filter by first and second bytes and output
         // ip = filter(46, 70)
-
+        std::cout << "Filter 46, 70:" <<std::endl;
+        auto ip_46_70 = filter(ip_pool,[](ip4 ip){ return (ip>=ip4{46,70,0,0} && ip<ip4{46,71,0,0});});
+        for(auto &cur_ip : ip_46_70)
+        {
+            std::cout << cur_ip <<std::endl;
+        }
         // 46.70.225.39
         // 46.70.147.26
         // 46.70.113.73
@@ -77,7 +88,26 @@ int main(int argc, char const *argv[])
 
         // TODO filter by any byte and output
         // ip = filter_any(46)
+        std::cout << "Filter 46 any:" <<std::endl;
+        auto ip_any_46 = filter(ip_pool,[](ip4 ip) {
+            unsigned char value = 46;
+            bool hasValue = false;
+            std::vector<std::string> ip_bytes = split(ip.to_string(), '.');
+            for(std::string &b : ip_bytes)
+            {
+                if(stoi(b) == value)
+                {
+                    hasValue = true;
+                    break;
+                }
+            }
 
+            return hasValue;
+        });
+        for(auto &cur_ip : ip_any_46)
+        {
+            std::cout << cur_ip <<std::endl;
+        }
         // 186.204.34.46
         // 186.46.222.194
         // 185.46.87.231

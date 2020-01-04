@@ -25,6 +25,48 @@ std::string ip4::to_string() const
     return sstr.str();
 }
 
+constexpr unsigned long ip4::to_ulong() const noexcept
+{
+    return
+            (static_cast<unsigned long>(data[0]) << 24) |
+            (static_cast<unsigned long>(data[1]) << 16) |
+            (static_cast<unsigned long>(data[2]) << 8) |
+            static_cast<unsigned long>(data[3]);
+}
+
+
+bool operator==(ip4 const & a1, ip4 const & a2) noexcept
+{
+    return a1.data == a2.data;
+}
+
+bool operator!=(ip4 const & a1, ip4 const & a2) noexcept
+{
+    return !(a1 == a2);
+}
+
+bool operator<(ip4 const & a1, ip4 const & a2) noexcept
+{
+
+    return a1.to_ulong() < a2.to_ulong();
+}
+
+bool operator>(ip4 const & a1, ip4 const & a2) noexcept
+{
+    return a2 < a1;
+}
+
+bool operator<=(ip4 const & a1, ip4 const & a2) noexcept
+{
+    return !(a1 > a2);
+}
+
+bool operator>=(ip4 const & a1, ip4 const & a2) noexcept
+{
+    return !(a1 < a2);
+}
+
+
 
 std::ostream& operator<<(std::ostream& os, const ip4& a)
 {
