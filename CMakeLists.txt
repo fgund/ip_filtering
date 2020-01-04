@@ -11,7 +11,7 @@ include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup(TARGETS)
 
 add_executable(ip_filter ip_filter.cpp)
-add_library(ip_filter_lib ip4.cpp ip4.h)
+add_library(ip_filter_lib ip4.cpp ip4.h filter.h)
 add_executable(gtest_ip gtest_ip.cpp)
 
 set_target_properties(

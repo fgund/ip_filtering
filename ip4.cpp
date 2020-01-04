@@ -1,7 +1,7 @@
 #include "ip4.h"
-//constexpr ip4::ip4() : data{{0} } {}
-constexpr ip4::ip4(unsigned char const a, unsigned char const b,
-              unsigned char const c, unsigned char const d):
+
+ip4::ip4(unsigned char const a, unsigned char const b,
+                   unsigned char const c, unsigned char const d):
         data{{a,b,c,d}} {}
 ip4::ip4(std::string& str)
 {
