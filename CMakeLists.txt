@@ -12,12 +12,12 @@ conan_basic_setup(TARGETS)
 
 add_executable(ip_filter ip_filter.cpp)
 add_library(ip_filter_lib ip4.cpp)
-#add_executable(gtest_ip gtest_ip.cpp)
+add_executable(gtest_ip gtest_ip.cpp)
 
 set_target_properties(
 	ip_filter
 	ip_filter_lib
-#	gtest_ip 
+	gtest_ip
 PROPERTIES
     CXX_STANDARD 14
     CXX_STANDARD_REQUIRED ON
@@ -27,10 +27,10 @@ target_link_libraries(ip_filter PRIVATE
     ip_filter_lib
 )
 
-#target_link_libraries(gtest_ip
-#    ip_filter_lib
-#    CONAN_PKG::gtest
-#)
+target_link_libraries(gtest_ip
+    ip_filter_lib
+    CONAN_PKG::gtest
+)
 
 
 if (MSVC)
@@ -50,9 +50,9 @@ else ()
     target_compile_options(ip_filter_lib PRIVATE
         -Wall -Wextra -pedantic -Werror
     )
-#    target_compile_options(gtest_ip PRIVATE
-#        -Wall -Wextra -pedantic -Werror
-#    )
+    target_compile_options(gtest_ip PRIVATE
+        -Wall -Wextra -pedantic -Werror
+    )
 endif()
 
 if (MSVC)
@@ -80,4 +80,4 @@ include(CPack)
 
 enable_testing()
 
-#add_test(g_test_version "bin/gtest_ip")
+add_test(g_test_version "bin/gtest_ip")
