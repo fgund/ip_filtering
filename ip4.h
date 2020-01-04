@@ -1,3 +1,5 @@
+#ifndef IP4_H
+#define IP4_H
 #include <iostream>
 #include <array>
 #include <sstream>
@@ -31,3 +33,5 @@ public:
 
     friend std::istream& operator>>(std::istream& is, ip4& a);
 };
+
+#endif //IP4_H
