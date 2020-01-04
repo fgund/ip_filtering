@@ -83,7 +83,7 @@ std::istream& operator>>(std::istream& is, ip4& a)
     int b1, b2, b3, b4;
     is >> b1 >> d1 >> b2 >> d2 >> b3 >> d3 >> b4;
     auto is_dot = [](char c){ return (c == '.');};
-    auto fits_char = [](int x){ return (x>=0)&&(x<=UCHAR_MAX);};
+    auto fits_char = [](int x){ return (x>=0)&&(x<=255);};
     if (is_dot(d1) && is_dot(d2) && is_dot(d3)
         && fits_char(b1) && fits_char(b2) && fits_char(b3) && fits_char(b4))
     {
