@@ -3,18 +3,28 @@
 ip4::ip4(unsigned char const a, unsigned char const b,
                    unsigned char const c, unsigned char const d):
         data{{a,b,c,d}} {}
-ip4::ip4(std::string& str)
+ip4::ip4(std::string_view str)
 {
     std::stringstream sstr;
-    sstr.str(str);
+    sstr.str(str.data());
     sstr >> *this;
 }
 
 ip4::ip4(ip4 const & other) noexcept : data(other.data) {}
+ip4::ip4(ip4 && other) noexcept
+{
+    data.swap(other.data);
+}
 
 ip4& ip4::operator=(ip4 const & other) noexcept
 {
     data = other.data;
+    return *this;
+}
+
+ip4& ip4::operator=(ip4 && other) noexcept
+{
+    data.swap(other.data);
     return *this;
 }
 

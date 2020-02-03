@@ -34,7 +34,7 @@ int main()
         {
             if (line.empty()) break;
             std::vector<std::string> v = split(line, '\t');
-            ip_pool.push_back({v[0]});
+            ip_pool.emplace_back(v[0]);
         }
 
         // reverse lexicographically sort

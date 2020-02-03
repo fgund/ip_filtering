@@ -12,11 +12,13 @@ public:
     ip4() = delete;
     ip4(unsigned char a, unsigned char b,
                   unsigned char c, unsigned char d);
-    ip4(std::string& str);
+    ip4(std::string_view str);
 
     ip4(ip4 const & other) noexcept;
+    ip4(ip4 && other) noexcept;
 
     ip4& operator=(ip4 const & other) noexcept;
+    ip4& operator=(ip4 && other) noexcept;
 
     std::string to_string() const;
     constexpr unsigned long to_ulong() const noexcept;

@@ -19,7 +19,7 @@ set_target_properties(
 	ip_filter_lib
 	gtest_ip
 PROPERTIES
-    CXX_STANDARD 14
+    CXX_STANDARD 17
     CXX_STANDARD_REQUIRED ON
 )
 
