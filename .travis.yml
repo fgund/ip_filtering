@@ -2,8 +2,6 @@ os: linux
 language: python
 python: "3.7"
 dist: xenial
-packages:
-  - g++-7
 install:
 # Install conan
   - pip install conan
@@ -16,6 +14,7 @@ script:
 - conan remote add bincrafters https://api.bintray.com/conan/bincrafters/public-conan
 - conan install -s compiler.libcxx=libstdc++11 .
 - conan profile update settings.compiler.libcxx=libstdc++11 default
+- conan profile update settings.compiler.version=7 default
 - cmake .
 - cmake --build . --config Release
 - cmake --build . --target test
