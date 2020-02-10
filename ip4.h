@@ -22,7 +22,8 @@ public:
 
     std::string to_string() const;
     constexpr unsigned long to_ulong() const noexcept;
-
+    uint8_t at(size_t index);
+    size_t size();
 
     friend bool operator==(ip4 const & a1, ip4 const & a2) noexcept;
     friend bool operator!=(ip4 const & a1, ip4 const & a2) noexcept;

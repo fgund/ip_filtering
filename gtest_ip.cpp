@@ -36,6 +36,24 @@ TEST(test_ip, test_ip_wrong_format)
     ASSERT_ANY_THROW(ip4{str});
 }
 
+TEST(test_ip, test_ip_at)
+{
+    auto ip = ip4{"192.168.2.1"};
+    ASSERT_EQ(168,ip.at(1));
+}
+
+TEST(test_ip, test_ip_size)
+{
+    auto ip = ip4{"192.168.2.1"};
+    ASSERT_EQ(4,ip.size());
+}
+
+TEST(test_ip, test_ip_exceed_range)
+{
+    auto ip = ip4{"192.168.2.1"};
+    ASSERT_ANY_THROW(ip.at(4));
+}
+
 int main(int argc, char** argv) {
     testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();

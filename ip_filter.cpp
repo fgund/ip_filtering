@@ -46,7 +46,7 @@ int main()
 
         // filter by first byte and output
         // ip = filter(1)
-        auto ip_1 = filter(ip_pool,[](ip4 ip){ return (ip>=ip4{1,0,0,0} && ip<ip4{2,0,0,0});});
+        auto ip_1 = filter(ip_pool,[](ip4 ip){ return (ip.at(0) == 1);});
         for(auto &cur_ip : ip_1)
         {
             std::cout << cur_ip <<std::endl;
@@ -55,7 +55,7 @@ int main()
 
         // filter by first and second bytes and output
         // ip = filter(46, 70)
-        auto ip_46_70 = filter(ip_pool,[](ip4 ip){ return (ip>=ip4{46,70,0,0} && ip<ip4{46,71,0,0});});
+        auto ip_46_70 = filter(ip_pool,[](ip4 ip){ return (ip.at(0) == 46) && (ip.at(1) == 70);});
         for(auto &cur_ip : ip_46_70)
         {
             std::cout << cur_ip <<std::endl;
@@ -63,19 +63,12 @@ int main()
 
         // filter by any byte and output
         // ip = filter_any(46)
-        auto ip_any_46 = filter(ip_pool,[](ip4 ip) {
-            unsigned char value = 46;
+        auto ip_any_46 = filter(ip_pool,[](ip4 ip, unsigned char value = 46) {
             bool hasValue = false;
-            std::vector<std::string> ip_bytes = split(ip.to_string(), '.');
-            for(std::string &b : ip_bytes)
+            for(size_t i = 0; i < ip.size(); i++)
             {
-                if(stoi(b) == value)
-                {
-                    hasValue = true;
-                    break;
-                }
+                hasValue |= (ip.at(i) == value);
             }
-
             return hasValue;
         });
         for(auto &cur_ip : ip_any_46)

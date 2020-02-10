@@ -44,6 +44,16 @@ constexpr unsigned long ip4::to_ulong() const noexcept
             static_cast<unsigned long>(data[3]);
 }
 
+uint8_t ip4::at(size_t index)
+{
+    if(index > data.size())
+        throw std::out_of_range("Exceeded data size");
+    return data.at(index);
+}
+size_t ip4::size()
+{
+    return data.size();
+}
 
 bool operator==(ip4 const & a1, ip4 const & a2) noexcept
 {
